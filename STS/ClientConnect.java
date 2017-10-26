@@ -14,8 +14,9 @@ class ClientConnect extends Thread
     protected String[] tokens;
 	
 	public static void main(String [] args){
-		System.out.print("Testing");
-		ClientConnect trial = new ClientConnect();
+		//System.out.print("Testing");
+		Socket clientSocket = new Socket("10.5.34.40", 5000);
+		ClientConnect trial = new ClientConnect(clientSocket, mySMRef);
 	}
 	
     public ClientConnect(Socket aSocket, StockMarket aSM)
