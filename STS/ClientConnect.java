@@ -12,7 +12,12 @@ class ClientConnect extends Thread
 
     protected boolean isRegistered = false;
     protected String[] tokens;
-
+	
+	public static void main(String [] args){
+		System.out.print("Testing");
+		ClientConnect trial = new ClientConnect();
+	}
+	
     public ClientConnect(Socket aSocket, StockMarket aSM)
     {
         clientSocket = aSocket;
