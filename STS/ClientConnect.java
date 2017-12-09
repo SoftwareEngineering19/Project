@@ -42,7 +42,6 @@ class ClientConnect extends Thread
                 {
                     System.out.println("ACK:" + clientSocket.getLocalSocketAddress() + ":" + clientSocket.getRemoteSocketAddress());
                     out.println("ACK:" + clientSocket.getLocalSocketAddress() + ":" + clientSocket.getRemoteSocketAddress());
-                    out.println("");
                 }
                 else if(inputText.equals("EXIT"))
                 {
