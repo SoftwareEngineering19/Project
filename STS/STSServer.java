@@ -5,10 +5,24 @@ public class STSServer
 {
 
     protected ServerSocket STSSocket = null;
+
     public StockMarket mySM;
 
-    public STSServer()
+    private static STSServer ref = null;
+    private String instName = "";
+
+
+    private STSServer()
     {
+    }
+
+    public static STSServer getObject()
+    {
+        if (ref == null)
+        {
+            ref = new STSServer();
+        }
+        return ref;
     }
 
     public void initSTS()
@@ -38,10 +52,44 @@ public class STSServer
         }
     }
 
+    public String getName()
+    {
+        return instName;
+    }
+
+    public void setName(String aName)
+    {
+        instName = aName;
+    }
+
     public static void main(String [] args)
     {
-        STSServer mySTS = new STSServer();
-        mySTS.initSTS();
-        mySTS.listenForClients();
+
+        //STSServer mySTS = new STSServer();
+        //Give a number and name(s)
+        if (args.length > 0){
+            if (args[0] != "0"){
+                for (int i=0; i < Integer.parseInt(args[0]); i++){
+                    //New command window
+                    //start STSServer.java 0 i;
+                    Runtime rt = Runtime.getRuntime();
+                    try{
+                        System.out.println("Trying");
+                        Process pr = rt.exec("cmd.exe");
+                    }
+                    catch(IOException e){
+                        System.out.println("Bad");
+                        e.printStackTrace();
+                    }
+                
+                }
+            
+            }
+        }
+        else{
+            STSServer mySTS = STSServer.getObject();
+            mySTS.initSTS();
+            mySTS.listenForClients();
+        }
     }
 }
