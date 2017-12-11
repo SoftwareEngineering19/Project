@@ -43,7 +43,7 @@ public class ClientRead implements Runnable
 
     public void run()
     {
-        System.out.println("DEBUG 1");
+        System.out.println("Read From Server Running...");
         while(true)
         {
             readFromServer();        

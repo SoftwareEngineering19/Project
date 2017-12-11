@@ -61,7 +61,6 @@ public class StockTrader {
         
         while(true)
         {
-            System.out.print("CMD: ");
             serverConnect.writeToServer();
         }
 
