@@ -9,41 +9,62 @@ import java.net.*;
 public class StockTrader {
 	
 	protected PrintWriter out = null;
-	protected BufferedReader in = null;
-	protected Socket serverSocket;
+	protected BufferedReader stdIn = null;
+	protected Socket toServerSocket;
 	
+	ClientRead myRead;
+	 
 	public StockTrader()
     {
-		try {
-			serverSocket = new Socket("192.168.1.103", 5000);
-			out = new PrintWriter(serverSocket.getOutputStream(), true);
-			in = new BufferedReader(new InputStreamReader(serverSocket.getInputStream()));
-			
-		} catch (UnknownHostException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
+		try
+        {
+            toServerSocket = new Socket("192.168.1.73", 5000);
+            out = new PrintWriter(toServerSocket.getOutputStream(), true);
+
+            stdIn = new BufferedReader(new InputStreamReader(System.in));
+
+        }
+        catch(IOException e)
+        {
+            System.out.println("Some Error: " + e);
+        }
+
+        myRead = new ClientRead(toServerSocket);
+        
     }
 	
+	public void writeToServer()
+    {
+        String aString;
+        try
+        {
+            aString = stdIn.readLine();
+            out.println(aString);
+        }
+        catch(IOException e)
+        {
+            System.out.println("Something went wrong: " + e);
+        }
+    }
+
+    public void StartThreads()
+    {
+        Thread t1 = new Thread(myRead);
+        t1.start();
+    }
+    
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		
 		StockTrader serverConnect = new StockTrader();
-		System.out.println("Connection to server starting....");
-        System.out.println("Server ip is: " + serverConnect.serverSocket.getRemoteSocketAddress() + "\n\n");
-        serverConnect.out.println("HELO");
+        serverConnect.StartThreads();
         
-        try {
-			System.out.println(serverConnect.in.readLine());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+        while(true)
+        {
+            serverConnect.writeToServer();
+        }
+
+	
 		
 	}
 
