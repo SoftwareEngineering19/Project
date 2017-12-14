@@ -36,7 +36,9 @@ public class StockTrader {
 	
 	public void writeToServer()
     {
-        String aString;
+        
+		String aString;
+		
         try
         {
             aString = stdIn.readLine();
@@ -64,7 +66,6 @@ public class StockTrader {
             serverConnect.writeToServer();
         }
 
-	
 		
 	}
 
