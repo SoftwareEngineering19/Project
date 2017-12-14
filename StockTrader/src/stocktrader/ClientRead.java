@@ -15,7 +15,7 @@ public class ClientRead implements Runnable
         clientSocket = aSocket;
         try
         {
-            in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream(), "utf-8"));
         }
         catch(IOException e)
         {
@@ -26,7 +26,7 @@ public class ClientRead implements Runnable
     public void readFromServer()
     {
         try
-        {
+        {	
             while(!(inString = in.readLine()).equals(""))
             {
                 //Do something
@@ -37,6 +37,8 @@ public class ClientRead implements Runnable
         {
             System.out.println("Error: " + e);
         }
+        catch(Exception e)
+        {}
     }
 
 

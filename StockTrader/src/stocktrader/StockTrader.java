@@ -36,6 +36,7 @@ public class StockTrader {
 	
 	public void writeToServer()
     {
+        
 		String aString;
 		
         try
@@ -47,7 +48,6 @@ public class StockTrader {
         {
             System.out.println("Something went wrong: " + e);
         }
-        
     }
 
     public void StartThreads()
